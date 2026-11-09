@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ovos-stt-plugin-apple"
+dynamic = ["version"]
+description = "OVOS STT plugin using Apple's Speech framework (macOS only) via a native Swift helper"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Apache-2.0" }
+dependencies = ["ovos-plugin-manager", "ovos-utils"]
+authors = [{ name = "Timon van Hasselt" }]
+classifiers = ["Operating System :: MacOS"]
+
+[project.urls]
+Homepage = "https://github.com/timonvanhasselt/ovos-stt-plugin-apple"
+Issues = "https://github.com/timonvanhasselt/ovos-stt-plugin-apple/issues"
+
+[project.entry-points."mycroft.plugin.stt"]
+ovos-stt-plugin-apple = "ovos_stt_apple:AppleSTT"
+
+[project.entry-points."mycroft.plugin.stt.config"]
+ovos-stt-plugin-apple-config = "ovos_stt_apple:AppleSTTConfig"
+
+[project.scripts]
+ovos-stt-apple-build = "ovos_stt_apple.build:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "ovos_stt_apple.version.__version__" }
+
+[tool.setuptools]
+packages = ["ovos_stt_apple"]
+
+[tool.setuptools.package-data]
+ovos_stt_apple = ["swift/*"]
